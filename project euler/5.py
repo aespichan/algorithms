@@ -2,14 +2,15 @@
 # https://projecteuler.net/problem=5
 
 def find_smallest_multiple(limit):
-  numbers = [n for n in range(2, limit + 1)]
+  factors = []
   multiple = 1
-  for i in range(len(numbers)):
-    num = numbers[i]
+  for num in range(2, limit + 1):
+    for factor in factors:
+      if num % factor == 0:
+        num //= factor
+    if num > 1:
+      factors.append(num)
     multiple *= num
-    for j in range(i + 1, len(numbers)):
-      if numbers[j] % num == 0:
-        numbers[j] //= num
   
   return multiple
   
